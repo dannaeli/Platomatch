@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlatoMatchBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0090616cd6b3a0189fd888671ef349307950c21a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+976015b14f64495767a0cd446f8cc12d98815149")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlatoMatchBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlatoMatchBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

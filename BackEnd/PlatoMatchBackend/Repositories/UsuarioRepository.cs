@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PlatoMatchBackend.Data;
 using PlatoMatchBackend.Models;
 
+
 namespace PlatoMatchBackend.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
@@ -15,6 +16,12 @@ namespace PlatoMatchBackend.Repositories
         public async Task<Usuario?> ObtenerPorCorreoAsync(string correo)
         {
             return await _context.Usuarios.FirstOrDefaultAsync(u => u.Correo == correo);
+        }
+
+        //Obtener usuario por ID
+        public async Task<Usuario?> ObtenerPorIdAsync(int id)
+        {
+            return await _context.Usuarios.FindAsync(id);
         }
 
         public async Task RegistrarUsuarioAsync(Usuario usuario)
@@ -35,7 +42,9 @@ namespace PlatoMatchBackend.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<string>> ObtenerIngredientesPorUsuariosAsync(int usuarioId)
+        //Obtener lista de ingredientes que el usuario tiene
+
+        public async Task<List<string>> ObtenerIngredientesPorUsuarioAsync(int usuarioId)
         {
             return await _context.InventarioUsuarios
             .Where(i => i.UsuarioId == usuarioId)
