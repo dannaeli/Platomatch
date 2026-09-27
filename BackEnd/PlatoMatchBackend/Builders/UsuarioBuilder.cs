@@ -15,7 +15,7 @@ namespace PlatoMatchBackend.Builders
                 throw new ArgumentException("La contraseña debe tener al menos 6 caracteres");
 
             _usuario.Nombre = nombre;
-            _usuario.Correro = correo;
+            _usuario.Correo = correo;
             _usuario.Contrasena = contrasena;
             return this;
         }
