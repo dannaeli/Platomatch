@@ -4,24 +4,24 @@ using PlatoMatchBackend.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Configuración de la bd 
+// 1. Configurar conexión a SQL Server
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContext>(options => 
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-//registrar patron repository (invesion de dependencias)
-builder.Services.AddScoped<IUsuarioRepository,UsuarioRepository>();
+// 2. Registrar el repositorio (Inyección de dependencias)
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
-// habilitacion de CORS para react
-var politicaCORS = "PermitirFrontReact";
+// 3. Configurar CORS para React
+var politicaCors = "PermitirFrontendReact";
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: politicaCORS,
+    options.AddPolicy(name: politicaCors,
         policy =>
         {
             policy.WithOrigins("http://localhost:5173", "http://localhost:3000")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
         });
 });
 
@@ -30,37 +30,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-if(app.Environment.IsDevelopment())
+
+// 4. Configurar Swagger para .NET 8
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
-app.UseCors(politicaCORS);
+app.UseCors(politicaCors);
 app.UseAuthorization();
-app.MapControllers();
-
-app.Run();
-// agrega servicios
-
-builder.Services.AddControllers();
-
-builder.Services.AddOpenApi();
-
-//var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
